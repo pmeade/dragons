@@ -19,10 +19,10 @@ class Func {
         return std::accumulate(inputs.begin(), inputs.end(), 0);
     }
 
+public:
     // TODO - fake function. This just adds
-    int f(Prime value) {
+    int f(Prime value) const {
         auto result = value + reduce_args();
-        inputs.clear();
         return result;
     }
 };

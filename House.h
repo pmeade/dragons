@@ -13,7 +13,7 @@ struct House
 {
     Prime value, prime;
 
-    Func f;
+    Func func;
 
     vector<Edge> edges;
 
@@ -21,16 +21,12 @@ struct House
 
     bool operator!=(const House &rhs) const;
 
-    House(const Prime &prime);
+    explicit House(const Prime &prime);
 
     void act(){
-        for (auto &edge : edges){
-            edge.add(f.f(value));
-        }
     }
 
     void input(Prime v){
-        f.inputs.push_back(v);
     }
 
     friend std::__1::ostream &operator<<(std::__1::ostream &os, const House &house);

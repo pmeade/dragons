@@ -13,7 +13,7 @@ using namespace std;
 
 class Dragon {
     int id;
-    Dragon(int id) : id(id) {}
+    explicit Dragon(int id) : id(id) {}
 
 public:
     int get_id() const {
@@ -34,11 +34,11 @@ public:
             {
                 auto actual_house_index = (h + dim.facing) % dim.num_houses;
                 auto &house = dim.houses[actual_house_index];
-                fx = house.f(fx);
+                fx = house.func.f(fx);
 
                 auto &world_house = world.higher_dimensions[d].houses[actual_house_index];
                 auto &new_world_house = new_world.higher_dimensions[d].houses[actual_house_index];
-                new_world_house.value = world_house.f(fx);
+                new_world_house.value = world_house.func.f(fx);
 
                 auto target_dimension = dim.edges[actual_house_index].target_dimension;
                 if (target_dimension != 0){
