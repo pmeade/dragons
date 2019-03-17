@@ -90,7 +90,7 @@ struct Plank {
         unique_ptr<Plank> plank(new Plank());
         for (int d = 0; d < num_higher_dimensions; ++d){
             for (int h = 0; h < plank->higher_dimensions[d].num_houses; ++h){
-                plank->higher_dimensions[d].houses[h].value = h + 1;
+                plank->higher_dimensions[d].houses[h].value = Prime{h + 1};
             }
         }
 

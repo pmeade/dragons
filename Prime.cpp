@@ -5,8 +5,8 @@
 #include "Plank.h"
 #include <iostream>
 #include "Prime.h"
+#include <boost/math/special_functions/prime.hpp>
 
-array<int, num_dimensions> Prime::primes{1,2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53};
 
 ostream &operator<<(ostream &os, const Prime &prime) {
     os << prime.value;
@@ -14,10 +14,12 @@ ostream &operator<<(ostream &os, const Prime &prime) {
 }
 
 void Prime::clamp() {
-    int clamped = primes[0];
-    for (auto v : primes){
-        if (v > value) break;
-        clamped = v;
+    int clamped = 1; // not a magic number. Just the lowest value supported by this class
+    for (auto pidx = 0; pidx < num_higher_dimensions; ++pidx)
+    {
+        auto prime_value = boost::math::prime(pidx);
+        if (prime_value > value) break;
+        clamped = prime_value;
     }
 
     value = clamped;

@@ -9,6 +9,8 @@
 #include <iostream>
 #include <algorithm>
 
+#include <boost/math/special_functions/prime.hpp>
+
 #include "Dragons.h"
 
 using namespace dragon_constants;
@@ -16,7 +18,6 @@ using namespace std;
 
 class Prime
 {
-    static std::__1::array<int, dragon_constants::num_dimensions> primes;
     int value;
     void clamp();
 
@@ -31,13 +32,9 @@ public:
     }
 
     static Prime Nth(uint8_t n){
-        if (n == 0) return primes[0];   // Bad case. Why can we pass 0 to this function?
+        if (n == 0) return 1;   // Bad case. Why can we pass 0 to this function?
 
-        // This function makes me unhappy. Passing in a higher param for now will just be
-        // mapped to the highest value possible
-        n = std::min(n, dragon_constants::num_dimensions);
-        --n; // We are internally dealing with an array index
-        return primes[(n % dragon_constants::num_dimensions)];
+        return boost::math::prime(n-1);
     }
 
     operator int() const {return value;}
@@ -46,11 +43,11 @@ public:
 
     bool operator!=(const Prime &rhs) const;
 
-    friend std::__1::ostream &operator<<(std::__1::ostream &os, const Prime &prime);
-
-    static int max_val(int d){
-        return primes[min(std::__1::max(0, d), dragon_constants::num_dimensions - 1)];
+    int operator+(int rhs) const {
+        return value + rhs;
     }
+
+    friend std::__1::ostream &operator<<(std::__1::ostream &os, const Prime &prime);
 };
 
 #include <vector>

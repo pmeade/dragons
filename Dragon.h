@@ -27,18 +27,18 @@ public:
         // walk through cone, updating world as we go
         // Start with the cone value and pass
         // that to the first node
-        auto fx = cone.value();
+        int fx = cone.value();
         for (int d = 0; d < num_higher_dimensions; ++d){
             auto &dim = cone.higher_dimensions[d];
             for (int h = 0; h < dim.num_houses; ++h)
             {
                 auto actual_house_index = (h + dim.facing) % dim.num_houses;
                 auto &house = dim.houses[actual_house_index];
-                fx = house.func.f(fx);
+                fx = house.func.f(Prime{fx});
 
                 auto &world_house = world.higher_dimensions[d].houses[actual_house_index];
                 auto &new_world_house = new_world.higher_dimensions[d].houses[actual_house_index];
-                new_world_house.value = world_house.func.f(fx);
+                new_world_house.value = world_house.func.f(Prime{fx});
 
                 auto target_dimension = dim.edges[actual_house_index].target_dimension;
                 if (target_dimension != 0){

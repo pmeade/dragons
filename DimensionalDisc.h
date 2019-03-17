@@ -14,7 +14,7 @@ struct DimensionalDisc
 {
     Prime num_houses;
     int facing, rotation;
-    std::__1::vector<Edge> edges;
+    std::vector<Edge> edges;
     std::vector<House> houses;
 
     DimensionalDisc(const Prime &num_houses, int facing, int rotation) : num_houses(num_houses),
@@ -75,7 +75,7 @@ struct DimensionalDisc
 
         cout << "Made a bunch of dimensions" << endl;
 
-        dimensions[0].add_edge(1, 1, 2, 3);
+        dimensions[0].add_edge(1, 1, 2, Prime{3});
         dimensions[3].spin(5);
         dimensions[3].advance();
 
