@@ -2,9 +2,9 @@
 // Created by Patrick Meade on 2019-03-09.
 //
 
-#include "../Dragon.h"
+#include "../src/Dragon.h"
 #include "catch.hpp"
-#include "../Plank.h"
+#include "../src/Plank.h"
 
 TEST_CASE("Breathe produces new world"){
     Plank spell;

@@ -7,7 +7,7 @@
 using namespace std;
 
 #include "catch.hpp"
-#include "../Edge.h"
+#include "../src/Edge.h"
 
 TEST_CASE("Edge Constructor Test") {
     Edge edge{1, 2, 3};

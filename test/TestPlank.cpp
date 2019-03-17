@@ -7,7 +7,7 @@
 using namespace std;
 
 #include "catch.hpp"
-#include "../Plank.h"
+#include "../src/Plank.h"
 
 TEST_CASE("Plank Constructor Test") {
     // Create thew most basic Plank

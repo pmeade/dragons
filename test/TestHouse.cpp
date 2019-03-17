@@ -3,7 +3,7 @@
 //
 
 
-#include "../House.h"
+#include "../src/House.h"
 #include "catch.hpp"
 
 TEST_CASE("F of X = x % value"){
