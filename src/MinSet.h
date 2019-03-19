@@ -11,7 +11,7 @@
 using namespace dragon_constants;
 using namespace std;
 
-struct MinSet : public std::__1::array<int, dragon_constants::num_higher_dimensions>
+struct MinSet : public std::array<int, dragon_constants::num_higher_dimensions>
 {
 
     // What is a MinSet?
@@ -26,7 +26,7 @@ struct MinSet : public std::__1::array<int, dragon_constants::num_higher_dimensi
     // How is it used?
     // It is used as a constant.
 
-    friend std::__1::ostream &operator<<(std::__1::ostream &os, const MinSet &set) {
+    friend std::ostream &operator<<(std::ostream &os, const MinSet &set) {
 
 
         os << "{1, ";

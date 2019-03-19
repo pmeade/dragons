@@ -47,7 +47,7 @@ public:
         return value + rhs;
     }
 
-    friend std::__1::ostream &operator<<(std::__1::ostream &os, const Prime &prime);
+    friend std::ostream &operator<<(std::ostream &os, const Prime &prime);
 };
 
 #include <vector>

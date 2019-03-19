@@ -34,7 +34,7 @@ struct DimensionalDisc
         facing += rotation;
     }
 
-    friend std::__1::ostream &operator<<(std::__1::ostream &os, const DimensionalDisc &disc) {
+    friend std::ostream &operator<<(std::ostream &os, const DimensionalDisc &disc) {
         os << "facing " << disc.facing << " of " << disc.num_houses << " houses with rotation of " << disc.rotation;
         os  << disc.edges;
         return os;
@@ -57,7 +57,7 @@ struct DimensionalDisc
         DimensionalDisc disc1{Prime{1}, 1, 0};
         cout << "Made a Prime Dimension with " << disc1.num_houses << " houses" << endl;
 
-        std::__1::vector<DimensionalDisc> dimensions;
+        std::vector<DimensionalDisc> dimensions;
         dimensions.push_back(disc1);
 
         for (int i = 1; i <= dragon_constants::num_higher_dimensions; ++i){

@@ -31,12 +31,12 @@ struct Edge
         return !(rhs == *this);
     }
 
-    friend std::__1::ostream &operator<<(std::__1::ostream &os, const Edge &edge) {
+    friend std::ostream &operator<<(std::ostream &os, const Edge &edge) {
         os << "=>" << edge.target_dimension << "|" << edge.target_house << ":=" << edge.weight;
         return os;
     }
 
-    friend std::__1::ostream &operator<<(std::__1::ostream &os, const std::__1::vector<Edge> &edges) {
+    friend std::ostream &operator<<(std::ostream &os, const std::vector<Edge> &edges) {
         for (auto i = 0; i < edges.size(); ++i)
         {
             if (edges[i].target_dimension > 0){

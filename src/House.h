@@ -29,7 +29,7 @@ struct House
     void input(Prime v){
     }
 
-    friend std::__1::ostream &operator<<(std::__1::ostream &os, const House &house);
+    friend std::ostream &operator<<(std::ostream &os, const House &house);
 };
 
 #include <vector>
