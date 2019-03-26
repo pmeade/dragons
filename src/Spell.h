@@ -7,17 +7,21 @@
 
 #include <ostream>
 #include "Dragons.h"
-#include "Plank.h"
-#include "Dragon.h"
+#include "Schema.h"
 
-using namespace dragon_constants;
+class Spell : public SeptumDecum{
 
-class Spell {
-
-    Plank plank;
-    int dragon_id;
 public:
-    Spell(int dragon_id, int power) : dragon_id(dragon_id) {}
+
+    Prime value() const override { return Prime{1};}
+
+    bool has_edge(House from, House to) const override {
+        return aspects[from.aspect - 1].has_edge(from, to);
+    }
+
+    static unique_ptr<Spell> make_spell(){
+        return make_unique<Spell>();
+    }
 };
 
 

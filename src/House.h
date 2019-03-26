@@ -6,30 +6,24 @@
 #define DRAGONS_HOUSE_H
 
 #include "Prime.h"
-#include "Func.h"
-#include "Edge.h"
 
-struct House
-{
-    Prime value, prime;
-
-    Func func;
-
-    vector<Edge> edges;
-
+struct House {
+    int aspect, number;
     bool operator==(const House &rhs) const;
 
     bool operator!=(const House &rhs) const;
 
-    explicit House(const Prime &prime);
-
-    void act(){
-    }
-
-    void input(Prime v){
-    }
+    House(int dimension, int number);
 
     friend std::ostream &operator<<(std::ostream &os, const House &house);
+
+    friend std::ostream &operator<<(std::ostream &os, const vector<House> &houses) {
+        for (auto h : houses){
+            os << " " << h << " ";
+        }
+        return os;
+    }
+
 };
 
 #include <vector>

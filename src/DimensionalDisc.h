@@ -7,27 +7,34 @@
 #include "Edge.h"
 #include "House.h"
 #include "Dragons.h"
+#include "DimensionalHouse.h"
 
 using namespace dragon_constants;
 
 struct DimensionalDisc
 {
     Prime num_houses;
-    int facing, rotation;
-    std::vector<Edge> edges;
-    std::vector<House> houses;
+    int dimension, facing, rotation;
+    std::vector<DimensionalHouse> houses;
 
-    DimensionalDisc(const Prime &num_houses, int facing, int rotation) : num_houses(num_houses),
-        facing(facing), rotation(rotation), edges(num_houses, Edge{}), houses(num_houses, House{num_houses})
+    DimensionalDisc(int dimension, const Prime &num_houses, int facing, int rotation) : dimension(dimension), num_houses(num_houses),
+        facing(facing), rotation(rotation)
     {
+        for (auto h = 1; h <= num_houses; ++h){
+            houses.emplace_back(DimensionalHouse{House{dimension, h}});
+        }
     }
 
     void spin(int tug){
         rotation += tug;
     }
 
-    void add_edge(int start_house, int target_disc, int target_house, Prime weight){
-        edges[start_house-1] = Edge{target_disc, target_house, weight};
+    void add_edge(int start_house, House to, Prime weight){
+        houses[start_house - 1].add_edge(to, weight);
+    }
+
+    bool has_edge(House from, House to) const {
+        return (from.aspect == dimension && houses[from.number-1].has_edge(to));
     }
 
     void advance(){
@@ -36,7 +43,6 @@ struct DimensionalDisc
 
     friend std::ostream &operator<<(std::ostream &os, const DimensionalDisc &disc) {
         os << "facing " << disc.facing << " of " << disc.num_houses << " houses with rotation of " << disc.rotation;
-        os  << disc.edges;
         return os;
     }
 
@@ -44,46 +50,12 @@ struct DimensionalDisc
         return num_houses == rhs.num_houses &&
                facing == rhs.facing &&
                rotation == rhs.rotation &&
-               edges == rhs.edges &&
-               houses == rhs.houses;
+               houses == rhs.houses &&
+               dimension == rhs.dimension;
     }
 
     bool operator!=(const DimensionalDisc &rhs) const {
         return !(rhs == *this);
-    }
-
-    static bool Test()
-    {
-        DimensionalDisc disc1{Prime{1}, 1, 0};
-        cout << "Made a Prime Dimension with " << disc1.num_houses << " houses" << endl;
-
-        std::vector<DimensionalDisc> dimensions;
-        dimensions.push_back(disc1);
-
-        for (int i = 1; i <= dragon_constants::num_higher_dimensions; ++i){
-            dimensions.push_back(DimensionalDisc{Prime::Nth(i), 1, 0});
-        }
-
-        for (auto d : dimensions) {
-            d.spin(d.num_houses);
-
-            if (d.rotation != d.num_houses){
-                cout << "Disc failed to rotate" << endl;
-                return false;
-            }
-        }
-
-        cout << "Made a bunch of dimensions" << endl;
-
-        dimensions[0].add_edge(1, 1, 2, Prime{3});
-        dimensions[3].spin(5);
-        dimensions[3].advance();
-
-        for (auto d : dimensions){
-            cout << d << endl;
-        }
-
-        return true;
     }
 };
 

@@ -10,8 +10,10 @@ using namespace std;
 #include "../src/Edge.h"
 
 TEST_CASE("Edge Constructor Test") {
-    Edge edge{1, 2, 3};
-    REQUIRE (edge.target_dimension == Prime{1});
-    REQUIRE(edge.target_house == Prime{2});
-    REQUIRE(edge.weight == Prime{3});
+    Edge edge{House{2,1}, House{4,3}, Prime::Nth(5)};
+    REQUIRE (edge.from.aspect == 2);
+    REQUIRE (edge.from.number == 1);
+    REQUIRE (edge.to.aspect == 4);
+    REQUIRE (edge.to.number == 3);
+    REQUIRE (edge.weight == Prime::Nth(5));
 }

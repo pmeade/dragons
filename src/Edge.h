@@ -7,23 +7,23 @@
 
 #include "Dragons.h"
 #include "Prime.h"
+#include "House.h"
+
 using namespace dragon_constants;
 using namespace std;
 
 struct Edge
 {
-    int target_house, target_dimension;
+    House from, to;
     Prime weight;
 
-    Edge() : target_dimension{0}, target_house{0} {}
+    Edge() : from{0,0}, to{0,0} {}
 
-    Edge(int target_dimension, int target_house, const Prime &weight) : target_dimension(target_dimension),
-                                                                        target_house(target_house),
-                                                                        weight(weight) {}
+    Edge(House from, House to, const Prime &weight) : from(from), to(to), weight(weight) {}
 
     bool operator==(const Edge &rhs) const {
-        return target_house == rhs.target_house &&
-               target_dimension == rhs.target_dimension &&
+        return from == rhs.from &&
+               to == rhs.to &&
                weight == rhs.weight;
     }
 
@@ -32,14 +32,14 @@ struct Edge
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Edge &edge) {
-        os << "=>" << edge.target_dimension << "|" << edge.target_house << ":=" << edge.weight;
+        os << "=>" << edge.to << "|" << edge.from << ":=" << edge.weight;
         return os;
     }
 
     friend std::ostream &operator<<(std::ostream &os, const std::vector<Edge> &edges) {
         for (auto i = 0; i < edges.size(); ++i)
         {
-            if (edges[i].target_dimension > 0){
+            if (edges[i].to.aspect > 0){
                 os << endl << i << edges[i];
             }
         }
