@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta lang="en-US">
+        <title>Septumdecum Simulator</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="index.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+    </head>
+
+    <body>
+        <div id="app">
+            <p><span> {{ header_message }} </span></p>
+
+                <div class="grid-item">
+                    <ul style="list-style-type:none;float:left">
+                        <li v-for="prime in primes">
+                            {{ prime }}
+                        </li>
+                    </ul>
+                
+                    <ul style="list-style-type:none;float:left">
+                        <li v-for="reading in faces">
+                            {{ reading }}
+                        </li>
+                    </ul>
+                
+                    <ul style="list-style-type:none;float:left">
+                        <li v-for="reading in energy">
+                            {{ reading }}
+                        </li>
+                    </ul>
+                
+                
+                    <ul style="list-style-type:none;float:left">
+                        <li v-for="reading in tension">
+                            {{ reading }}
+                        </li>
+                    </ul>
+                
+                
+                    <ul style="list-style-type:none;float:left">
+                        <li v-for="reading in change">
+                            {{ reading }}
+                        </li>
+                    </ul>
+                
+                </div>
+
+            <span>
+                <input type="button" v-on:click="add_dragos(1000)" value="Add Dragos">
+                <input type="button" v-on:click="take_dragos(1000)" value="Take Dragos">
+                <input type="button" v-on:click="tick()" value="Tick">
+                <!-- <input type="button" @click="take_dragos" value="Take Dragos"> -->
+            </span>
+        </div>
+
+    <script src="index.js"></script>
+
+    </body>
+</html>
