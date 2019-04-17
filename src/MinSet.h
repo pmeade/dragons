@@ -26,6 +26,15 @@ struct MinSet : public std::array<int, dragon_constants::num_dimensions> {
         return os;
     }
 
+    string save() const {
+        string stored;
+        for (auto i = 1; i < num_dimensions; ++i){
+            stored += static_cast<unsigned char>(at(i));
+        }
+
+        return stored;
+    }
+
     MinSet() : array<int, num_dimensions>{0} {}
 
     MinSet(const MinSet &minSet)  = default;

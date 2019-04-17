@@ -23,7 +23,7 @@ public:
         return move(make_unique<Verse>(*this));
     }
 
-    void absord_breath(const Breath &breath) {
+    void absorb_breath(const Breath &breath) {
         for (auto &aspect : aspects){
             for (auto &house : aspect.houses)
             {

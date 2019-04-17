@@ -10,6 +10,7 @@
 #include "Spell.h"
 #include "Verse.h"
 #include "Breath.h"
+#include "DragonState.h"
 
 
 using namespace std;
@@ -21,7 +22,10 @@ class Dragon {
 
 public:
 
-    explicit Dragon(int id) : id(id), schema(Schema::new_schema()) {}
+    explicit Dragon(int id) : id{id}, schema{Schema::new_schema()} {}
+
+    explicit Dragon(DragonState dragon_state) : id{dragon_state.id}, schema{Schema::restore_state(dragon_state.schema_state)} {}
+
     int get_id() const {
         return id;
     }
@@ -48,15 +52,32 @@ public:
         return schema->aspects[house.aspect-1].houses[house.number-1].value;
     }
 
+    DragonState save_state() const {
+        auto state = schema->save_state();
+        return DragonState{id, state};
+    }
 
     unique_ptr<Breath> breathe(Prime input) {
         schema->pulse(input);
         return Breath::new_breath(*schema);
     }
 
+    static unique_ptr<Dragon> restore_dragon(DragonState dragon_state) {
+        return move(make_unique<Dragon>(dragon_state));
+    }
+
     static unique_ptr<Dragon> make_dragon(){
         static int id_source = 0;
         return move(make_unique<Dragon>(++id_source));
+    }
+
+    bool operator==(const Dragon &rhs) const {
+        return id == rhs.id &&
+               *schema == *rhs.schema;
+    }
+
+    bool operator!=(const Dragon &rhs) const {
+        return !(rhs == *this);
     }
 };
 

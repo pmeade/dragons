@@ -41,4 +41,4 @@ add_executable(Dragons
         test/TestPlank.cpp
         test/TestEdge.cpp
         test/TestHouse.cpp
-        test/TestDragon.cpp src/Snip.cpp src/Snip.h test/TestDimensionalDisc.cpp test/TestMinSet.cpp test/TestSchema.cpp src/Filament.cpp src/Filament.h)
+        test/TestDragon.cpp src/Snip.cpp src/Snip.h test/TestDimensionalDisc.cpp test/TestMinSet.cpp test/TestSchema.cpp src/Filament.cpp src/Filament.h test/TestChain.cpp src/Chain.h src/DragonState.h src/SchemaState.h src/EdgeState.h src/HouseState.h)

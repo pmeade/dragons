@@ -23,7 +23,9 @@ using namespace dragon_constants;
 
 
 struct SeptumDecum {
-protected:
+    MinSet minSet;
+    typedef array<DimensionalDisc, num_dimensions> Aspects;
+    Aspects aspects;
 
     SeptumDecum() :
         aspects{{
@@ -45,9 +47,9 @@ protected:
             DimensionalDisc{16, Prime::Nth(15), 1, 0},
             DimensionalDisc{17, Prime::Nth(16), 1, 0}}}
             {}
-public:
-    MinSet minSet;
-    array<DimensionalDisc, num_dimensions> aspects;
+
+    SeptumDecum(const MinSet &minSet, const Aspects &aspects) : minSet(minSet), aspects(aspects) {}
+
 
     friend ostream &operator<<(ostream &os, const SeptumDecum &plank) {
         os << plank.minSet << endl;

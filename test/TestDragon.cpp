@@ -74,7 +74,7 @@ TEST_CASE("Dragon can modify world state"){
 
     // Change universal state
     auto breath = dragon1->breathe(Prime::Nth(60));
-    verse->absord_breath(*breath);
+    verse->absorb_breath(*breath);
 
     REQUIRE(test_value == verse->value());
 }

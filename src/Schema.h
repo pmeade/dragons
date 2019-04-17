@@ -6,11 +6,37 @@
 #define DRAGONS_SCHEMA_H
 
 
+#include <ostream>
+#include <queue>
 #include "SeptumDecum.h"
+#include "SchemaState.h"
 
 class Schema : public SeptumDecum {
 
 public:
+
+    Schema(const SchemaState &state)
+    {
+        for (auto i = 0; i < num_dimensions - 1; ++i) {
+            minSet[i] = state.minSet[i];
+        }
+
+        for (auto &aspect : aspects){
+            for (auto &house : aspect.houses){
+                house.set_value(house.value);
+            }
+        }
+
+        for (auto &edge : state.edges){
+            aspects[edge.from_dimension-1].add_edge(
+                    edge.to_dimension, House{edge.to_dimension, edge.to_number}, edge.weight);
+        }
+    }
+
+    Schema(const MinSet &minSet, const array<DimensionalDisc, num_dimensions> &aspects) : SeptumDecum{minSet, aspects}
+    {
+
+    }
 
     void add_edge(House from, House to, Prime weight) {
         aspects[from.aspect - 1].add_edge(from.number, to, weight);
@@ -51,9 +77,47 @@ public:
         return aspects[from.aspect - 1].has_edge(from, to);
     }
 
+    SchemaState save_state() const {
+        SchemaState state;
+
+        for (auto i = 0; i < num_dimensions-1; ++i) {
+            state.minSet[i] = minSet[i];
+        }
+
+        queue<Edge> edges;
+
+        auto i = 0;
+        for (auto aspect : aspects) {
+            for (auto house : aspect.houses) {
+                auto &state_house = state.houses[i++];
+                state_house.value = house.get_value();
+                for (auto edge : house.edges) {
+                    edges.emplace(edge);
+                }
+            }
+        }
+
+        while (!edges.empty()) {
+            auto &edge = edges.front();
+            state.edges.push_back(
+                    EdgeState{
+                            (uint8_t)edge.from.aspect,
+                            (uint8_t)edge.from.number,
+                            (uint8_t)edge.to.aspect,
+                            (uint8_t)edge.to.number,
+                            (uint8_t)edge.weight
+                    }
+            );
+        }
+
+        return state;
+    }
+
+    static unique_ptr<Schema> restore_state(const SchemaState &schema_state) {
+        return move(make_unique<Schema>(schema_state));
+    }
 
     unique_ptr<Schema> clone_schema() const { return make_unique<Schema>(*this);}
-
 };
 
 
