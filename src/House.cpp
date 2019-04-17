@@ -2,23 +2,23 @@
 // Created by Patrick Meade on 2019-03-07.
 //
 
-#include "Plank.h"
+#include "SeptumDecum.h"
 #include <iostream>
 #include "House.h"
 
 ostream &operator<<(ostream &os, const House &house) {
-    os << house.value << " of " << house.prime;
+    cout << "[" << house.aspect << ":" << house.number << "}";
     return os;
 }
 
 bool House::operator==(const House &rhs) const {
-    return value == rhs.value &&
-           prime == rhs.prime;
+    return aspect == rhs.aspect &&
+           number == rhs.number;
 }
 
 bool House::operator!=(const House &rhs) const {
     return !(rhs == *this);
 }
 
-House::House(const Prime &prime) : value(0), prime(prime) {}
+House::House(int dimension, int number) : aspect(dimension), number(number) {}
 

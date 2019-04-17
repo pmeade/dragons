@@ -3,14 +3,10 @@
 //
 
 
-#include "../src/House.h"
+#include "../src/DimensionalHouse.h"
 #include "catch.hpp"
 
-TEST_CASE("F of X = x % value"){
-    House house{5};
-    house.value = Prime{5};
-    REQUIRE(house.func.f(4) == 3);
-    REQUIRE(house.func.f(5) == 5);
-    REQUIRE(house.func.f(6) == 5);
-    REQUIRE(house.func.f(7) == 7);
+TEST_CASE("House can set value"){
+    DimensionalHouse house{House{3,3}};
+    house.set_value(Prime{5});
 }

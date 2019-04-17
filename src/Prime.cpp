@@ -2,7 +2,7 @@
 // Created by Patrick Meade on 2019-03-07.
 //
 
-#include "Plank.h"
+#include "SeptumDecum.h"
 #include <iostream>
 #include "Prime.h"
 #include <boost/math/special_functions/prime.hpp>
@@ -15,7 +15,7 @@ ostream &operator<<(ostream &os, const Prime &prime) {
 
 void Prime::clamp() {
     int clamped = 1; // not a magic number. Just the lowest value supported by this class
-    for (auto pidx = 0; pidx < num_higher_dimensions; ++pidx)
+    for (auto pidx = 0; pidx < num_dimensions; ++pidx)
     {
         auto prime_value = boost::math::prime(pidx);
         if (prime_value > value) break;

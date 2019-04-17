@@ -21,9 +21,14 @@ class Func {
 
 public:
     // TODO - fake function. This just adds
-    int f(Prime value) const {
+    Prime operator()(Prime value) {
         auto result = value + reduce_args();
+        inputs.clear();
         return result;
+    }
+
+    void store_input(Prime input){
+        inputs.push_back(input);
     }
 };
 

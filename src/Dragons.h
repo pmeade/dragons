@@ -9,7 +9,7 @@
 namespace dragon_constants
 {
     constexpr uint8_t num_dimensions = 17;
-    constexpr uint8_t num_higher_dimensions = 16;
+    constexpr uint16_t num_houses = 341;
 
 }
 

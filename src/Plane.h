@@ -6,7 +6,9 @@
 #define DRAGONS_PLANE_H
 
 
-class Plane {
+struct Plane {
+
+
 
 };
 
